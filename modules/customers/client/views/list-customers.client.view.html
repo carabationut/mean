@@ -2,20 +2,27 @@
   <div class="page-header">
     <h1>Customers</h1>
   </div>
-  <div class="list-group">
-    <a data-ng-repeat="customer in vm.customers"
-       data-ui-sref="customers.view({ customerId: customer._id })"
-       class="list-group-item">
-      <small class="list-group-item-text">
-        Posted on
-        <span data-ng-bind="customer.created | date:'mediumDate'"></span>
-        by
-        <span data-ng-if="customer.user" data-ng-bind="customer.user.displayName"></span>
-        <span data-ng-if="!customer.user">Deleted User</span>
-      </small>
-      <h4 class="list-group-item-heading" data-ng-bind="customer.name"></h4>
-    </a>
+
+  <div class="row">
+      <div class="col-xs-12 col-sm-8">
+            <div class="input-group input-group-lg">
+              <input type="text" class="form-control" placeholder="Search for..." ng-model="searchText">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+              </span>
+            </div><!-- /input-group -->
+      </div>
+      <div class="col-xs-12 col-sm-4 text-center">
+         <button type="button" class="btn btn-success text-center"  ng-click="vm.modalCreate('lg')">
+             <i class="glyphicon glyphicon-user"></i><br/>
+             New Customer
+         </button>
+      </div>    
   </div>
+  <br/>
+  <br/>
+  <customer-list></customer-list>
+
   <div class="alert alert-warning text-center" data-ng-if="vm.customers.$resolved && !vm.customers.length">
     No Customers yet, why don't you <a data-ui-sref="customers.create">create one</a>?
   </div>
